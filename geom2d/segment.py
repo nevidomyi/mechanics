@@ -18,3 +18,14 @@ class Segment:
     @property
     def normal_versor(self):
         return self.direction_versor.perpendicular()
+
+    @property
+    def length(self):
+        return self.start.distance_to(self.end)
+
+    def point_at(self, t: float):
+        return self.start.displaced(self.direction_vector, t)
+
+    @property
+    def middle(self):
+        return self.point_at(0.5)
