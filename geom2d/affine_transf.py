@@ -7,7 +7,7 @@ from geom2d.point import Point
 
 
 class AffineTransform:
-    def __init__(self, sx=1, sy=1, tx=0, ty=1, shx=0, shy=0):
+    def __init__(self, sx=1, sy=1, tx=0, ty=0, shx=0, shy=0):
         self.sx = sx
         self.sy = sy
         self.tx = tx
