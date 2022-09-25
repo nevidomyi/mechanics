@@ -58,6 +58,11 @@ class TestSegment(unittest.TestCase):
         actual = self.segment.intersection_with(other)
         self.assertIsNone(actual)
 
+    def test_segments_out_of_range(self):
+        other = Segment(Point(200, 0), Point(1, -30))
+        actual = self.segment.intersection_with(other)
+        self.assertIsNone(actual)
+
     def test_segment_intersection(self):
         other = Segment(Point(0, 0), Point(400, 400))
         expected = Point(200, 200)

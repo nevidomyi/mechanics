@@ -1,4 +1,5 @@
 from geom2d import tparam
+from geom2d.line import Line
 from geom2d.point import Point
 from geom2d.vectors import make_vector_between, make_versor_between
 
@@ -24,13 +25,17 @@ class Segment:
     def length(self):
         return self.start.distance_to(self.end)
 
+    @property
+    def middle(self):
+        return self.point_at(tparam.MIDDLE)
+
+    @property
+    def bisector(self):
+        return Line(self.middle, self.normal_versor)
+
     def point_at(self, t: float):
         tparam.ensure_valid(t)
         return self.start.displaced(self.direction_vector, t)
-
-    @property
-    def middle(self):
-        return self.point_at(0.5)
 
     def closest_point_to(self, p: Point):
         v = make_vector_between(self.start, p)
@@ -64,3 +69,16 @@ class Segment:
             return self.point_at(t1)
         else:
             return None
+
+    def __eq__(self, other):
+        if self is other:
+            return True
+
+        if not isinstance(other, Segment):
+            return False
+
+        return self.start == other.start \
+            and self.end == other.end
+
+    def __str__(self):
+        return f'segment from {self.start} to {self.end}'
